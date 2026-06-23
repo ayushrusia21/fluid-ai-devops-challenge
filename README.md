@@ -2,19 +2,21 @@
 
 ## Architecture
 
+```text
 GitHub
-↓
+   ↓
 GitHub Actions (CI)
-↓
+   ↓
 Docker Image
-↓
+   ↓
 Kind Kubernetes Cluster
-
-├── Flask Deployment
-│   └── Flask Service
-│
-└── MongoDB Deployment
-    └── MongoDB Service
+      │
+      ├── Flask Deployment
+      │     └── Flask Service
+      │
+      └── MongoDB Deployment
+            └── MongoDB Service
+```
 
 ## Components
 
