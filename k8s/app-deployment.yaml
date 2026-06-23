@@ -24,12 +24,22 @@ spec:
         ports:
         - containerPort: 5000
 
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+
         readinessProbe:
           httpGet:
             path: /health
             port: 5000
           initialDelaySeconds: 5
           periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 3
 
         livenessProbe:
           httpGet:
@@ -37,3 +47,5 @@ spec:
             port: 5000
           initialDelaySeconds: 10
           periodSeconds: 10
+          timeoutSeconds: 2
+          failureThreshold: 3
