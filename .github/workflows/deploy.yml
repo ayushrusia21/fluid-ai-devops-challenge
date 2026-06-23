@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Push Docker Image
 
 on:
   push:
@@ -6,37 +6,23 @@ on:
       - main
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: |
+          docker build -t ayushrusia21/fluid-ai-app:v1 .
 
-    - name: Build Docker Image
-      run: |
-        docker build -t ayushrusia21/fluid-ai-app:v1 .
-
-    - name: Push Docker Image
-      run: |
-        docker push ayushrusia21/fluid-ai-app:v1
-
-    - name: Setup Kubectl
-      uses: azure/setup-kubectl@v4
-
-    - name: Configure Kubeconfig
-      run: |
-        mkdir -p ~/.kube
-        echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
-
-    - name: Deploy Application
-      run: |
-        kubectl apply -f k8s/
-        kubectl rollout restart deployment/fluid-ai-app -n fluid-ai
+      - name: Push Docker Image
+        run: |
+          docker push ayushrusia21/fluid-ai-app:v1
