@@ -2,24 +2,32 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fluid-ai-app
+  namespace: fluid-ai
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: fluid-ai-app
+
   template:
     metadata:
       labels:
         app: fluid-ai-app
+
     spec:
       containers:
       - name: fluid-ai-app
-        image: fluid-ai-app:latest
+        image: ayushrusia21/fluid-ai-app:v1
         imagePullPolicy: IfNotPresent
 
         env:
         - name: MONGO_HOST
-          value: mongodb
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_HOST
 
         ports:
         - containerPort: 5000
