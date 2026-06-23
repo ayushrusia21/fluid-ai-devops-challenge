@@ -4,17 +4,17 @@
 
 GitHub
 ↓
-GitHub Actions
+GitHub Actions (CI)
 ↓
 Docker Image
 ↓
 Kind Kubernetes Cluster
 
-Flask Application
-↓
-MongoDB Service
-↓
-MongoDB Pod
+├── Flask Deployment
+│   └── Flask Service
+│
+└── MongoDB Deployment
+    └── MongoDB Service
 
 ## Components
 

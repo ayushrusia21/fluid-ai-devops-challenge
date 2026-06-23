@@ -19,3 +19,7 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t fluid-ai-app .
+
+      - name: Verify Kubernetes CLI
+        run: |
+          kubectl version --client
