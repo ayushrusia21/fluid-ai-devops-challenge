@@ -5,7 +5,7 @@ metadata:
   namespace: fluid-ai
 
 spec:
-  replicas: 1
+  replicas: 2
 
   selector:
     matchLabels:
