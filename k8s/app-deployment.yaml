@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: fluid-ai-app
-        image: ayushrusia21/fluid-ai-app:wrong
+        image: ayushrusia21/fluid-ai-app:v1
         imagePullPolicy: IfNotPresent
 
         env:
